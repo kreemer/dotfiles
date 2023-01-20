@@ -1,0 +1,10 @@
+#!/usr/bin/env fish
+curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
+fisher install jorgebucaran/hydro
+fisher install dracula/fish
+
+{{ if eq .chezmoi.os "linux" -}}
+sudo pamac install --no-confirm starship
+{{ else if eq .chezmoi.os "darwin" -}}
+brew install -q starship
+{{ end -}}

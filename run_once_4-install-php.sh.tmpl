@@ -1,0 +1,8 @@
+#!/usr/bin/env fish
+{{ if eq .chezmoi.os "linux" -}}
+sudo pamac install --no-confirm php
+sudo pamac build composer
+{{ else if eq .chezmoi.os "darwin" -}}
+brew install -q php composer
+brew install -q symfony-cli/tap/symfony-cli
+{{ end -}}

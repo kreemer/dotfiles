@@ -1,0 +1,13 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/usr/bin/env bash
+
+sudo pamac install --no-confirm fish exa bat git git-lfs
+chsh -s /usr/bin/fish
+
+{{ else if eq .chezmoi.os "darwin" -}}
+#!/usr/bin/env bash
+brew install -q fish exa bat git git-lfs nvim
+
+sudo sh -c "echo /usr/local/bin/fish >> /etc/shells"
+chsh -s /usr/local/bin/fish
+{{ end -}}

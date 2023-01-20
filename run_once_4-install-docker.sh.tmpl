@@ -1,0 +1,7 @@
+#!/usr/bin/env fish
+{{ if eq .chezmoi.os "linux" -}}
+sudo pamac install --no-confirm docker
+{{ else if eq .chezmoi.os "darwin" -}}
+brew install -q virtualbox
+brew install -q --cask docker
+{{ end -}}

@@ -1,0 +1,18 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/usr/bin/env bash
+sudo pamac build --no-confirm \
+	jetbrains-toolbox \
+	teams \
+	nerd-fonts-jetbrains-mono
+
+sudo pamac install --no-confirm brave-browser
+{{ else if eq .chezmoi.os "darwin" -}}
+#!/usr/bin/env bash
+brew install -q jetbrains-toolbox \
+    microsoft-teams \
+    alacritty \
+    font-jetbrains-mono-nerd-font \
+    brave-browser \
+    warp
+    # google-chrome \
+{{ end -}}

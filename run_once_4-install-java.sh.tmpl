@@ -1,0 +1,6 @@
+#!/usr/bin/env fish
+{{ if eq .chezmoi.os "linux" -}}
+
+{{ else if eq .chezmoi.os "darwin" -}}
+brew install -q openjdk
+{{ end -}}
