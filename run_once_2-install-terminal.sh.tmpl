@@ -6,7 +6,7 @@ chsh -s /usr/bin/fish
 
 {{ else if eq .chezmoi.os "darwin" -}}
 #!/usr/bin/env bash
-brew install -q fish exa bat git git-lfs nvim
+brew install -q fish exa bat git git-lfs nvim helix
 
 sudo sh -c "echo /usr/local/bin/fish >> /etc/shells"
 chsh -s /usr/local/bin/fish
