@@ -1,9 +1,0 @@
-#!/usr/bin/env fish
-{{ if eq .chezmoi.os "linux" -}}
-
-{{ else if eq .chezmoi.os "darwin" -}}
-brew install -q plantuml
-brew install -q dbeaver-community mysql-client
-brew install -q visual-studio-code
-brew install -q marksman
-{{ end -}}

@@ -1,9 +1,18 @@
 [[language]]
 name = "php"
-scope = "source.php"
-injection-regex = "php"
-file-types = ["php", "inc"]
-shebangs = ["php"]
-roots = ["composer.json", "index.php"]
-language-server = { command = "intelephense", args = ["--stdio"] }
-indent = { tab-width = 4, unit = "    " }
+language-server = { command = "phpactor", args = ["language-server", "-vvv"] }
+
+
+[language.debugger]
+name = "xdebug"
+command = "node"
+args = ["/home/hasnayeen/.vscode/extensions/xdebug.php-debug-1.29.0/out/phpDebug.js"]
+transport = "tcp"
+port-arg = "--server={}"
+
+[[language.debugger.templates]]
+name = "listen"
+request = "launch"
+completion = [ { name = "binary", completion = "filename" } ]
+args = { log = "true" }
+

@@ -14,6 +14,7 @@ env:
     # TERM:"" nvim
 
 window:
+    option_as_alt: Both
     # Window dimensions in character columns and lines
     # (changes require restart)
     dimensions:
@@ -55,7 +56,7 @@ decorations: full
 #
 # Values for `startup_mode` (macOS only):
 #   - SimpleFullscreen
-startup_mode: Windowed
+startup_mode: Fullscreen
 
 # scrolling.multiplier: 3
 
@@ -249,7 +250,7 @@ cursor:
         # - Block
         # - Underline
         # - Beam
-        style: Block
+    style: Block
 
 # Whether the cursor should be a hollow block on window focus loss
 unfocused_hollow: true
@@ -412,4 +413,3 @@ key_bindings:
     - { key: F12,      mods: Command, chars: "\x1b[24;3~"                  }
     - { key: NumpadEnter,             chars: "\n"                          }
     
-alt_send_esc: false

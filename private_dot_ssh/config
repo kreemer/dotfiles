@@ -24,8 +24,15 @@ Host ublab04 ublab04.unibe.ch
   User ks21i943
   #ProxyJump ublab01
 
+Host pitv
+  HostName 130.92.165.233
+  User pi
+  ProxyJump ubweb01
+  PubkeyAcceptedKeyTypes +ssh-rsa
+
 Host ubweb01
   HostName ubweb01.ub.unibe.ch
+  PubkeyAcceptedKeyTypes +ssh-rsa
   User ks21i943
 
 Host ubweb02

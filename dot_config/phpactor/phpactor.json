@@ -1,10 +1,9 @@
 {
-    "$schema": "/Users/kreemer/Code/kreemer/phpactor/phpactor.schema.json",
-    "language_server_php_cs_fixer.enabled": true,
-    "symfony.enabled": true,
-    "language_server_phpstan.enabled": true,
-    "logging.enabled": true,
-    "code_transform.class_new.variants": {
-        "unit": "phpunit_test"
-    }
+  "$schema": "/Users/kreemer/Code/kreemer/phpactor/phpactor.schema.json",
+  "indexer.exclude_patterns": [
+    "/vendor/**/Tests/**/*",
+    "/vendor/**/tests/**/*",
+    "/var/cache/**/*",
+    "/vendor/composer/**/*"
+  ]
 }

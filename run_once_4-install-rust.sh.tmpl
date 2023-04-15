@@ -1,6 +1,0 @@
-#!/usr/bin/env fish
-{{ if eq .chezmoi.os "linux" -}}
-sudo pamac install --no-confirm rust rust-analyzer
-{{ else if eq .chezmoi.os "darwin" -}}
-brew install -q rust rust-analyzer
-{{ end -}}

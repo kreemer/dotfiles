@@ -1,4 +1,6 @@
+theme_gruvbox dark
 set -gx EDITOR hx
+
 if status is-interactive
     # Commands to run in interactive sessions can go here
     set fish_prompt_pwd_dir_length 4

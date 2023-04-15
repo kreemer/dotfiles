@@ -1,0 +1,14 @@
+{{ if eq .chezmoi.os "linux" -}}
+
+{{ else if eq .chezmoi.os "darwin" -}}
+
+sudo sh -c "echo /usr/local/bin/fish >> /etc/shells"
+chsh -s /usr/local/bin/fish
+curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
+
+fisher install jomik/fish-gruvbox
+fisher install jorgebucaran/hydro
+fisher install dracula/fish
+
+
+{{ end -}}
