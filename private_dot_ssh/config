@@ -1,3 +1,5 @@
+Include /Users/kreemer/.colima/ssh_config
+
 Host home
   HostName home.lethani.ch
 
