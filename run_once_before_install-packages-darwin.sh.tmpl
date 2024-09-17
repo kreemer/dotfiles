@@ -1,6 +1,11 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!bin/bash
+
+echo "test"
+
+brew bundle --no-lock --file=/dev/stdin <<EOF
 tap "homebrew/bundle"
 tap "homebrew/services"
-
 brew "azure-cli"
 brew "bat"
 brew "colima"
@@ -11,7 +16,6 @@ brew "git"
 brew "git-lfs"
 brew "helix"
 brew "jq"
-
 cask "enpass"
 cask "font-cascadia-code-pl"
 cask "forticlient"
@@ -30,3 +34,6 @@ vscode "ms-vscode-remote.remote-ssh-edit"
 vscode "ms-vscode.remote-explorer"
 vscode "pkief.material-product-icons"
 vscode "rangav.vscode-thunder-client"
+EOF
+
+{{ end -}}
