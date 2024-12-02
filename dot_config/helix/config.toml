@@ -1,1 +1,4 @@
-theme = "dracula"
+theme = "gruvbox_dark_hard"
+
+[editor]
+true-color = true
