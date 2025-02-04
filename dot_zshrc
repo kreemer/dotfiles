@@ -107,6 +107,6 @@ alias ls="eza"
 alias cat="bat"
 alias ll="eza -la"
 
-alias devconup="devcontainer up --workspace-folder . --additional-features '{ \"ghcr.io/kreemer/features/helix:1\": {} }' --dotfiles-repository \"https://github.com/kreemer/dotfiles\""
+alias devconup="devcontainer up --workspace-folder . --additional-features '{ \"ghcr.io/kreemer/features/helix:1\": {} }' --dotfiles-repository \"https://github.com/kreemer/dotfiles\" --dotfiles-install-command \"~/dotfiles/setup-devcontainer.sh\""
 alias devconshell="devcontainer exec --workspace-folder . zsh"
 alias devconhx="devcontainer exec --workspace-folder . hx"
