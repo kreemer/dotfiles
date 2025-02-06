@@ -1,6 +1,6 @@
 #!/bin/bash
 
-{{- if (and (eq .chezmoi.os "linux") (not .codespaces)) -}}
+{{ if (and (eq .chezmoi.os "linux") (not .codespaces)) }}
 
 # Default editor
 sudo snap install --classic helix
@@ -28,7 +28,7 @@ sudo apt update
 sudo apt install -y eza
 
 
-{{ end -}}
+{{ end }}
 
 # oh-my-zsh
 if [ ! -d $HOME/.oh-my-zsh ]; then
