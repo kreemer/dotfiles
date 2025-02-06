@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin init --apply kreemer
+sh -c "$(curl -fsLS get.chezmoi.io)" -- -b $HOME/bin init --apply kreemer
