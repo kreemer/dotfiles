@@ -1,5 +1,6 @@
-{{- if eq .chezmoi.os "linux" -}}
 #!/bin/bash
+
+{{- if (and (eq .chezmoi.os "linux") (not .codespaces)) -}}
 
 # Default editor
 sudo snap install --classic helix
@@ -16,11 +17,6 @@ sudo apt install -y zsh git bat
 	&& sudo apt update \
 	&& sudo apt install gh -y
 
-# oh-my-zsh
-if [ ! -d $HOME/.oh-my-zsh ]; then
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-fi 
-
 
 # eza
 sudo apt install -y gpg
@@ -33,3 +29,8 @@ sudo apt install -y eza
 
 
 {{ end -}}
+
+# oh-my-zsh
+if [ ! -d $HOME/.oh-my-zsh ]; then
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi 
