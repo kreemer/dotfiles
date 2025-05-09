@@ -130,7 +130,7 @@ browserpipe () {
     OPEN_UTILITY="wslview"
   fi
 
-  if [[ -f /tmp/hostbrowserpipe ]]; then
+  if [[ -e /tmp/hostbrowserpipe ]]; then
     rm /tmp/hostbrowserpipe
   fi
 
