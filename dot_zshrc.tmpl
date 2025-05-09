@@ -119,11 +119,34 @@ alias ls="eza"
 alias cat="bat"
 alias ll="eza -la"
 
-alias devconup="devcontainer up --workspace-folder . --additional-features '{ \"ghcr.io/kreemer/features/helix:1\": {}, \"ghcr.io/kreemer/features/marksman:1\": {}}' --dotfiles-repository \"https://github.com/kreemer/dotfiles\" --remote-env \"CODESPACES=true\""
-
 devconshell () {
   TOKEN=`gh auth token`
   devcontainer exec --workspace-folder . --remote-env "GH_TOKEN=$TOKEN" zsh
+}
+
+browserpipe () {
+  OPEN_UTILITY="xdg-open"
+  if [[ $(uname -r) =~ (m|M)icrosoft ]]; then
+    OPEN_UTILITY="wslview"
+  fi
+
+  if [[ -f /tmp/hostbrowserpipe ]]; then
+    rm /tmp/hostbrowserpipe
+  fi
+
+  mkfifo /tmp/hostbrowserpipe
+  while read -r URL < /tmp/hostbrowserpipe; do $OPEN_UTILITY "$URL"; done
+}
+
+devconup () {
+  browserpipe &
+
+  devcontainer up --workspace-folder . \
+    --additional-features '{ \"ghcr.io/kreemer/features/helix:1\": {}, \"ghcr.io/kreemer/features/marksman:1\": {}}' \
+    --dotfiles-repository \"https://github.com/kreemer/dotfiles\" \
+    --remote-env \"CODESPACES=true\" \
+    --remote-env \"BROWSER=/var/run/hostbrowserpipe\" \
+    --mount type=bind,source=/tmp/hostbrowserpipe,target=/var/run/hostbrowserpipe
 }
 
 {{ end }}
