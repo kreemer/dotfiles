@@ -121,7 +121,7 @@ alias ll="eza -la"
 
 devconshell () {
   TOKEN=`gh auth token`
-  devcontainer exec --workspace-folder . --remote-env "GH_TOKEN=$TOKEN" zsh
+  devcontainer exec --workspace-folder . --remote-env "GH_TOKEN=$TOKEN" --remote-env "BROWSER=/var/run/hostbrowserpipe" zsh
 }
 
 browserpipe () {
