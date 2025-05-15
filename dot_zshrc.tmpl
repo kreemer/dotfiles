@@ -121,7 +121,7 @@ alias ll="eza -la"
 
 devconshell () {
   TOKEN=`gh auth token`
-  devcontainer exec --workspace-folder . --remote-env "GH_TOKEN=$TOKEN" --remote-env "BROWSER=/var/run/hostbrowserpipe" zsh
+  devcontainer exec --workspace-folder . --remote-env "GH_TOKEN=$TOKEN" --remote-env "BROWSER=/var/run/devcon/browser.sh" --remote-env "CODESPACES=true" zsh
 }
 
 browserpipe () {
@@ -130,23 +130,37 @@ browserpipe () {
     OPEN_UTILITY="wslview"
   fi
 
-  if [[ -e /tmp/hostbrowserpipe ]]; then
-    rm /tmp/hostbrowserpipe
+  if [[ -z "$1" ]]; then
+    return 1
   fi
 
-  mkfifo /tmp/hostbrowserpipe
-  while read -r URL < /tmp/hostbrowserpipe; do $OPEN_UTILITY "$URL"; done
+  TEMP_DIR="$1"
+  mkfifo $TEMP_DIR/browser.socket
+  echo '#!/bin/bash\n\nwhile read -r URL < '$TEMP_DIR'/browser.socket; do '$OPEN_UTILITY' $URL; done' > $TEMP_DIR/browser_socket.sh
+  chmod +x $TEMP_DIR/browser_socket.sh
+
+  echo '#!/bin/bash\n\nSCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )\n\necho $SCRIPT_DIR\necho $1 > $SCRIPT_DIR/browser.socket' > $TEMP_DIR/browser.sh
+  chmod +x $TEMP_DIR/browser.sh
+
+  $TEMP_DIR/browser_socket.sh &
+
+  return 0
 }
 
 devconup () {
-  browserpipe &
+  TEMP_DIR=$(mktemp -d)
+  echo "Creating devconhelper in $TEMP_DIR"
+  browserpipe $TEMP_DIR
+  RETURN=$?
+  if [[ $RETURN -gt 0 ]]; then
+    return $RETURN
+  fi
 
   devcontainer up --workspace-folder . \
-    --additional-features '{ \"ghcr.io/kreemer/features/helix:1\": {}, \"ghcr.io/kreemer/features/marksman:1\": {}}' \
-    --dotfiles-repository \"https://github.com/kreemer/dotfiles\" \
-    --remote-env \"CODESPACES=true\" \
-    --remote-env \"BROWSER=/var/run/hostbrowserpipe\" \
-    --mount type=bind,source=/tmp/hostbrowserpipe,target=/var/run/hostbrowserpipe
+    --additional-features '{ "ghcr.io/kreemer/features/helix:1": {}, "ghcr.io/kreemer/features/marksman:1": {}}' \
+    --dotfiles-repository "https://github.com/kreemer/dotfiles" \
+    --remote-env "CODESPACES=true" \
+    --mount type=bind,source=$TEMP_DIR,target=/var/run/devcon
 }
 
 {{ end }}
