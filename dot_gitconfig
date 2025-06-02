@@ -1,12 +1,12 @@
 # This is Git's per-user configuration file.
 [user]
-	name = kreemer
-	email = kevin@familie-studer.ch
+    name = kreemer
+    email = kevin@familie-studer.ch
 [credential "https://github.com"]
-	helper = 
-	helper = !gh auth git-credential
+    helper = 
+    helper = !gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
-	helper = !gh auth git-credential
+    helper = 
+    helper = !gh auth git-credential
 [init]
-        defaultBranch = main
+    defaultBranch = main
