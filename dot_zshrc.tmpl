@@ -115,6 +115,8 @@ export EDITOR='hx'
 
 {{ if (not .codespaces) }}
 
+export GH_TOKEN=$(gh auth token)
+
 alias ls="eza"
 alias cat="batcat"
 alias ll="eza -la"
