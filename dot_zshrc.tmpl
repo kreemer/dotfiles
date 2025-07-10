@@ -159,13 +159,13 @@ devconup () {
   fi
 
   devcontainer up --workspace-folder . \
-    --additional-features '{ "ghcr.io/kreemer/features/helix:1": {}, "ghcr.io/kreemer/features/marksman:1": {}}' \
+    --additional-features '{ "ghcr.io/kreemer/features/helix:1": {}, "ghcr.io/kreemer/features/marksman:1": {}, "ghcr.io/devcontainers/features/github-cli:1": {}}' \
     --dotfiles-repository "https://github.com/kreemer/dotfiles" \
     --remote-env "CODESPACES=true" \
     --mount type=bind,source=$TEMP_DIR,target=/var/run/devcon
 }
 
-{{ if contains "WSL" .chezmoi.kernel.osrelease }}
+{{ if (and (eq .chezmoi.os "linux") (contains "WSL" .chezmoi.kernel.osrelease)) }}
 keep_current_path() {
   printf "\e]9;9;%s\e\\" "$(wslpath -w "$PWD")"
 }
