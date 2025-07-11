@@ -118,6 +118,11 @@ export EDITOR='hx'
 export GH_TOKEN=$(gh auth token)
 
 alias ls="eza"
+{{ if lookPath "bat" }}
+alias cat="bat"
+{{ else if lookPath "batcat" }}
+alias cat="batcat"
+{{ end }}
 alias cat="batcat"
 alias ll="eza -la"
 
