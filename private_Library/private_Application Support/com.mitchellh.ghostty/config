@@ -1,2 +1,4 @@
 theme = Gruvbox Dark Hard
 font-size = 16
+keybind = global:cmd+$=toggle_quick_terminal
+quick-terminal-position = bottom
