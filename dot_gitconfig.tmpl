@@ -4,11 +4,9 @@
     email = kevin@familie-studer.ch
 [init]
     defaultBranch = main
-{{ if (not .devpod) -}}
 [credential "https://github.com"]
     helper = 
     helper = !gh auth git-credential
 [credential "https://gist.github.com"]
     helper = 
     helper = !gh auth git-credential
-{{ end }}
