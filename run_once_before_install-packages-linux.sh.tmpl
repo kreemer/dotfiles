@@ -1,7 +1,6 @@
 #!/bin/bash
 
-$HOME/.local/bin/chezmoi data
-{{ if (or (not .codespaces) (not .devpod)) }}
+{{ if (and (not .codespaces) (not .devpod)) }}
 
 # Default editor
 sudo snap install --classic helix
