@@ -8,7 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-{{ if (not .codespaces) -}}
+{{ if (and (not .codespaces) (not .devpod)) -}}
 ZSH_THEME="robbyrussell"
 {{ else -}}
 ZSH_THEME="agnoster"
@@ -75,7 +75,7 @@ ZSH_THEME="agnoster"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
-{{ if (not .codespaces) -}}
+{{ if (and (not .codespaces) (not .devpod)) -}}
 plugins=(git macos vscode)
 {{ else -}}
 plugins=(git)
@@ -113,7 +113,7 @@ export EDITOR='hx'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-{{ if (not .codespaces) }}
+{{ if (and (not .codespaces) (not .devpod)) -}}
 
 export GH_TOKEN=$(gh auth token)
 
@@ -177,6 +177,9 @@ keep_current_path() {
 precmd_functions+=(keep_current_path)
 {{ end }}
 
+{{ else }}
+
+alias bicep-langserver="bicep-ls"
 {{ end }}
 
 azsubswitch () {
