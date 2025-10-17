@@ -1,3 +1,5 @@
 {{- $codespaces:= env "CODESPACES" | not | not -}}
+{{- $devpod:= env "DEVPOD" | not | not -}}
 data:
     codespaces: {{ $codespaces }}
+    devpod: {{ $devpod }}
