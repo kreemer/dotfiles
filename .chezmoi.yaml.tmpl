@@ -1,5 +1,6 @@
 {{- $codespaces:= env "CODESPACES" | not | not -}}
 {{- $devpod:= env "DEVPOD" | not | not -}}
 data:
+    tiling: false
     codespaces: {{ $codespaces }}
     devpod: {{ $devpod }}

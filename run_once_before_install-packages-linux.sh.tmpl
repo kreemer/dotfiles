@@ -1,3 +1,4 @@
+{{- if eq .chezmoi.os "linux" -}}
 #!/bin/bash
 
 {{ if (and (not .codespaces) (not .devpod)) }}
@@ -70,3 +71,4 @@ if ! hx -V &> /dev/null ; then
 fi
 {{ end }}
 
+{{ end }}

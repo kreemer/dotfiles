@@ -13,8 +13,7 @@ brew "helix"
 brew "jq"
 brew "eza"
 brew "fzf"
-brew "dotnet@8"
-brew "zellij"
+brew "mas"
 cask "ghostty"
 cask "proton-mail"
 cask "proton-pass"
@@ -23,9 +22,35 @@ cask "docker-desktop"
 #cask "displaylink"
 #cask "microsoft-teams"
 cask "font-cascadia-code-pl"
+cask "font-hack-nerd-font"
 cask "signal"
 cask "visual-studio-code"
 cask "spotify"
 EOF
+
+
+mas install 1585682577 # vimkey
+
+{{ if .tiling }}
+if csrutil status | grep '^System Integrity Protection status: unknown'; then
+
+	brew bundle --file=- <<EOF
+tap "koekeishiya/formulae"
+tap "jackielii/tap"
+tap "FelixKratz/formulae"
+
+brew "FelixKratz/formulae/sketchybar"
+brew "koekeishiya/formulae/yabai"
+brew "jackielii/tap/skhd-zig"
+EOF
+	brew services start sketchybar
+	skhd --start-service
+	yabai --start-service
+
+	echo "Install yabai as explained in https://github.com/koekeishiya/yabai/wiki/Installing-yabai-(latest-release)"
+	echo ""
+	echo '$ echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 $(which yabai) | cut -d " " -f 1) $(which yabai) --load-sa" | sudo tee /private/etc/sudoers.d/yabai'
+fi
+{{ end -}}
 
 {{ end -}}
