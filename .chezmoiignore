@@ -1,4 +1,4 @@
 setup.sh
-{{- if .devpod }}
+{{ if (or (.codespaces) (.devpod)) }}
 .gitconfig 
 {{- end }}
