@@ -1,6 +1,8 @@
 {{- $codespaces:= env "CODESPACES" | not | not -}}
 {{- $devpod:= env "DEVPOD" | not | not -}}
+{{- $container:= (or (env "CODESPACES" | not | not) (env "DEVPOD" | not | not) (env "USER" | eq "vscode")) -}}
 data:
     tiling: false
     codespaces: {{ $codespaces }}
     devpod: {{ $devpod }}
+    container: {{ $container }}
