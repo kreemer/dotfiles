@@ -12,3 +12,11 @@ language-id = "terraform-vars"
 [language-server.terraform-ls]
 command = "terraform-ls"
 args = ["serve"]
+
+[[language]]
+name = "php"
+language-servers = [ "devsense" ]
+
+[language-server.devsense]
+command = "devsense-php-ls"
+args = ["--stdio"]
