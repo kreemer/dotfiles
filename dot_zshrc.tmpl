@@ -117,6 +117,7 @@ export EDITOR='hx'
 {{ if (not .container) -}}
 
 export GH_TOKEN=$(gh auth token)
+export DEVSENSE_PHP_LS_LICENSE={{ secret "item" "view" "--vault-name" "Privat" "--item-title" "Devsense" "--field" "Lizenz" }}
 
 alias ls="eza"
 {{ if lookPath "bat" }}
