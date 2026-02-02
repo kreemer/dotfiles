@@ -20,3 +20,7 @@ language-servers = [ "devsense" ]
 [language-server.devsense]
 command = "devsense-php-ls"
 args = ["--stdio"]
+config = {
+    "0": "{{ secret "item" "view" "--vault-name" "Privat" "--item-title" "Devsense" "--field" "Lizenz" }}"
+}
+
