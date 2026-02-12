@@ -2,6 +2,7 @@
 [user]
     name = kreemer
     email = kevin@familie-studer.ch
+    signinkey = C22D8700427424E9
 [init]
     defaultBranch = main
 {{ if (not .container) -}}
@@ -15,3 +16,8 @@
     helper =
     helper = !/opt/homebrew/bin/gh auth git-credential
 {{ end }}
+
+[commit]
+    gpgsign = true
+[tag]
+    gpgSign = true
