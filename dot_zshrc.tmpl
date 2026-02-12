@@ -119,6 +119,11 @@ export EDITOR='hx'
 export GH_TOKEN=$(gh auth token)
 export DEVSENSE_PHP_LS_LICENSE={{ secret "item" "view" "--vault-name" "Privat" "--item-title" "Devsense" "--field" "Lizenz" }}
 
+if [ -z "$SSH_AUTH_SOCK" ] ; then
+    pass-cli ssh-agent start & 
+    export SSH_AUTH_SOCK=$HOME/.ssh/proton-pass-agent.sock
+fi
+
 alias ls="eza"
 {{ if lookPath "bat" }}
 alias cat="bat"

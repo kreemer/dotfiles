@@ -4,11 +4,14 @@
     email = kevin@familie-studer.ch
 [init]
     defaultBranch = main
-{{ if (or (env "CODESPACES" | not | not) (env "DEVPOD" | not | not))  -}}
+{{ if (not .container) -}}
 [credential "https://github.com"]
     helper = 
     helper = !gh auth git-credential
 [credential "https://gist.github.com"]
     helper = 
     helper = !gh auth git-credential
+[credential "https://github.unibe.ch"]
+    helper =
+    helper = !/opt/homebrew/bin/gh auth git-credential
 {{ end }}
