@@ -20,4 +20,6 @@ language-servers = [ "devsense" ]
 [language-server.devsense]
 command = "devsense-php-ls"
 args = ["--stdio"]
-
+{{ if lookPath "pass-cli" }}
+config = { "0" = "{{ secret "item" "view" "--vault-name" "Privat" "--item-title" "Devsense" "--field" "Lizenz" }}" }
+{{ end }}
