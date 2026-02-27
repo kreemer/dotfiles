@@ -5,7 +5,7 @@
     signinkey = C22D8700427424E9
 [init]
     defaultBranch = main
-{{ if (not .container) -}}
+{{ if (or (not .container) (.devcon)) -}}
 [credential "https://github.com"]
     helper = 
     helper = !gh auth git-credential
