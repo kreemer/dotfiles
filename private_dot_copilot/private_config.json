@@ -32,5 +32,9 @@
         "repo": "microsoftdocs/mcp"
       }
     }
-  ]
+  ],
+  "enabledPlugins": {
+    "microsoft-docs@microsoft-docs-marketplace": true,
+    "microsoftdocs/mcp": true
+  }
 }

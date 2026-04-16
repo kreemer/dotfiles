@@ -131,49 +131,7 @@ alias cat="batcat"
 {{ end }}
 alias ll="eza -la"
 
-devconshell () {
-  TOKEN=`gh auth token`
-  devcontainer exec --workspace-folder . --remote-env "GH_TOKEN=$TOKEN" --remote-env "BROWSER=/var/run/devcon/browser.sh" --remote-env "CODESPACES=true" zsh
-}
-
-browserpipe () {
-  OPEN_UTILITY="xdg-open"
-  if [[ $(uname -r) =~ (m|M)icrosoft ]]; then
-    OPEN_UTILITY="wslview"
-  fi
-
-  if [[ -z "$1" ]]; then
-    return 1
-  fi
-
-  TEMP_DIR="$1"
-  mkfifo $TEMP_DIR/browser.socket
-  echo '#!/bin/bash\n\nwhile read -r URL < '$TEMP_DIR'/browser.socket; do '$OPEN_UTILITY' $URL; done' > $TEMP_DIR/browser_socket.sh
-  chmod +x $TEMP_DIR/browser_socket.sh
-
-  echo '#!/bin/bash\n\nSCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )\n\necho $SCRIPT_DIR\necho $1 > $SCRIPT_DIR/browser.socket' > $TEMP_DIR/browser.sh
-  chmod +x $TEMP_DIR/browser.sh
-
-  $TEMP_DIR/browser_socket.sh &
-
-  return 0
-}
-
-devconup () {
-  TEMP_DIR=$(mktemp -d)
-  echo "Creating devconhelper in $TEMP_DIR"
-  browserpipe $TEMP_DIR
-  RETURN=$?
-  if [[ $RETURN -gt 0 ]]; then
-    return $RETURN
-  fi
-
-  devcontainer up --workspace-folder . \
-    --additional-features '{ "ghcr.io/kreemer/features/helix:1": {}, "ghcr.io/kreemer/features/marksman:1": {}, "ghcr.io/devcontainers/features/github-cli:1": {}}' \
-    --dotfiles-repository "https://github.com/kreemer/dotfiles" \
-    --remote-env "CODESPACES=true" \
-    --mount type=bind,source=$TEMP_DIR,target=/var/run/devcon
-}
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 {{ if (and (eq .chezmoi.os "linux") (contains "WSL" .chezmoi.kernel.osrelease)) }}
 keep_current_path() {
@@ -199,4 +157,3 @@ azsubswitch () {
 
   return 0
 }
-# eval "$(zellij setup --generate-auto-start zsh)"
