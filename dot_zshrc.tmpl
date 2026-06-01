@@ -119,6 +119,8 @@ export EDITOR='hx'
 export GH_TOKEN=$(gh auth token)
 export DEVSENSE_PHP_LS_LICENSE={{ secret "item" "view" "--vault-name" "Privat" "--item-title" "Devsense" "--field" "Lizenz" }}
 
+
+
 if [ ! -z "$SSH_AUTH_SOCK" ] ; then
     pass-cli ssh-agent load
 fi
@@ -142,6 +144,11 @@ precmd_functions+=(keep_current_path)
 {{ end }}
 
 {{ else }}
+
+# Fix TERM for terminals (e.g. Ghostty) that lack remote terminfo entries
+if [ "$TERM" = "xterm-ghostty" ] && ! infocmp "$TERM" &>/dev/null; then
+  export TERM=xterm-256color
+fi
 
 alias bicep-langserver="bicep-ls"
 {{ end }}
