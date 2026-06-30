@@ -16,6 +16,15 @@ brew "jq"
 brew "eza"
 brew "fzf"
 brew "mas"
+brew "yazi"
+brew "ffmpeg-full"
+brew "sevenzip"
+brew "poppler"
+brew "fd"
+brew "ripgrep"
+brew "zoxide"
+brew "resvg"
+brew "imagemagick-full"
 brew "Azure/kubelogin/kubelogin"
 brew "protonpass/tap/pass-cli"
 brew "pinentry-mac"
@@ -37,10 +46,15 @@ cask "visual-studio-code"
 cask "spotify"
 cask "whatsapp"
 cask "bruno"
+cask "warp"
+cask "font-symbols-only-nerd-font"
 EOF
 
 
 #mas install 1585682577 # vimkey
+mas install 6502835663 # Proton Pass Safari
+
+ya pkg add malick-tammal/monokai
 
 {{ if .tiling }}
 if csrutil status | grep '^System Integrity Protection status: unknown'; then

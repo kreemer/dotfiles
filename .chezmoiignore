@@ -2,3 +2,6 @@ setup.sh
 {{ if (or (.codespaces) (.devpod)) }}
 .gitconfig 
 {{- end }}
+{{ if ne .chezmoi.os "darwin" }}
+Library
+{{- end }}
