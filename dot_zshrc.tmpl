@@ -120,7 +120,6 @@ export GH_TOKEN=$(gh auth token)
 export DEVSENSE_PHP_LS_LICENSE={{ secret "item" "view" "--vault-name" "Privat" "--item-title" "Devsense" "--field" "Lizenz" }}
 
 
-
 if [ ! -z "$SSH_AUTH_SOCK" ] ; then
     pass-cli ssh-agent load
 fi
@@ -163,4 +162,13 @@ azsubswitch () {
     fzf --no-multi --bind 'enter:execute(az account set -s {1})+abort'
 
   return 0
+}
+
+# Yazi
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	command yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+	command rm -f -- "$tmp"
 }
